@@ -84,10 +84,8 @@ describe('CreaterContract', () => {
         console.log('contractAddress  - ', contractAddress);
 
         const contract = await createrCont.getAnOtherAddress(14n);
-        console.log('contract  - ', contract);
-
         createrCont = blockchain.openContract(await CreaterCont.fromInit(14n));
-        const deployContract = await createrCont.send(
+        await createrCont.send(
             deployer.getSender(),
             {
                 value: toNano('0.05'),
@@ -98,7 +96,6 @@ describe('CreaterContract', () => {
             },
         );
         let newContract = await createrCont.getAddress();
-        console.log('newContract', newContract);
         expect(contract.toString()).toEqual(newContract.toString());
     });
 });
